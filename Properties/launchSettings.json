@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "DER.System.API": {
+    "MBL.DER.System.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
