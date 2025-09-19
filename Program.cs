@@ -29,6 +29,8 @@ builder.Services.AddScoped<CustomerMaterialListingRepository>();
 builder.Services.AddScoped<CustomerRouteRepository>();
 builder.Services.AddScoped<MaterialRepository>();
 
+// Bind individual keys from root
+builder.Services.Configure<KeyConfig>(builder.Configuration);
 
 
 builder.Services.AddMemoryCache();
