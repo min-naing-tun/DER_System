@@ -1,4 +1,10 @@
+using DER_System;
+using DER_System.Helper;
+using DER_System.Repository;
+using DER_System.Utilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NKC_Resource_Allocation.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Connectin string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -14,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 
-//Dependency Injection
+
 
 
 builder.Services.AddMemoryCache();
@@ -25,7 +30,13 @@ builder.Services.AddResponseCompression();
 
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
+
+
+// Middleware
+app.UseMiddleware<Guard>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
