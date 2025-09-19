@@ -12,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Connectin string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// Add services to the container.
+builder.Services.AddDbContext<DerDbContext>(opts => opts.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,6 +21,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 
+//Dependency Injection
+builder.Services.AddScoped<QueryHelper>();
+
+builder.Services.AddScoped<CustomerRepository>();
+builder.Services.AddScoped<CustomerMaterialListingRepository>();
+builder.Services.AddScoped<CustomerRouteRepository>();
+builder.Services.AddScoped<MaterialRepository>();
 
 
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DER_System.Model;
+using DER_System.Utilities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -18,6 +20,12 @@ namespace DER_System.Controllers
         {
             DataTable dt = new DataTable();
             return Ok(dt);
+        }
+
+        [HttpPost]
+        public IActionResult PostData(TestModel obj)
+        {
+            return Ok(obj);
         }
     }
 }
