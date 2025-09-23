@@ -23,6 +23,10 @@ namespace DER_System
 
         public DbSet<Materials> Materials { get; set; }
 
+        public DbSet<Routes> Routes { get; set; }
+
+        public DbSet<CustomerRouteListings> CustomerRouteListings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,12 +36,16 @@ namespace DER_System
             modelBuilder.Entity<Customers>().ToTable(constants.Customer);
             modelBuilder.Entity<MaterialTypes>().ToTable(constants.MaterialType);
             modelBuilder.Entity<Materials>().ToTable(constants.Material);
+            modelBuilder.Entity<Routes>().ToTable(constants.Route);
+            modelBuilder.Entity<CustomerRouteListings>().ToTable(constants.CustomerRouteListing);
 
             //Table exclude on migration
             modelBuilder.Entity<Users>().ToTable(t => t.ExcludeFromMigrations());
             modelBuilder.Entity<Customers>().ToTable(t => t.ExcludeFromMigrations());
             modelBuilder.Entity<MaterialTypes>().ToTable(t => t.ExcludeFromMigrations());
             modelBuilder.Entity<Materials>().ToTable(t => t.ExcludeFromMigrations());
+            modelBuilder.Entity<Routes>().ToTable(t => t.ExcludeFromMigrations());
+            modelBuilder.Entity<CustomerRouteListings>().ToTable(t => t.ExcludeFromMigrations());
         }
     }
 }

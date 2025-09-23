@@ -2,11 +2,11 @@
 
 namespace DER_System.ViewModels
 {
-    public class CustomerRouteListingUpdateModel
+    public class CustomerRouteListModel
     {
         [Required]
-        public string CustomerCode { get; set; } // Unique ID
+        public string? RouteCode { get; set; }
         [Required]
-        public string RouteCode { get; set; }
+        public string? CustomerCode { get; set; }
     }
 }
