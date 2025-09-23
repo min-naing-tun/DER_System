@@ -22,7 +22,7 @@ namespace DER_System.Helper
         public Task<DataTable> GetDataTableAsync(string sSQL, SqlParameter[] para)
         {
             var _conStr = _config.GetConnectionString("DefaultConnection");
-            int _timeout = _config.GetSection("DbTimeout").Value != null ? int.Parse(_config.GetSection("DbTimeout").Value) : 3600;
+            int _timeout = _config.GetSection("DbTimeout").Value != null ? int.Parse(_config.GetSection("DbTimeout").Value!) : 3600;
             return Task.Run(() =>
             {
                 using (var newCon = new SqlConnection(_conStr))
