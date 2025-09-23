@@ -2,13 +2,13 @@
 
 namespace DER_System.ViewModels
 {
-    public class MaterialUpdateModel
+    public class MaterialModel
     {
         [Required]
-        public string Code { get; set; } // Unique ID
+        public string? Code { get; set; } // Unique ID
         [Required]
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [Required]
-        public string MaterialGroupCode { get; set; }
+        public string? MaterialType { get; set; }
     }
 }

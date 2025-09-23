@@ -39,4 +39,35 @@ namespace DER_System.Model
         public DateTime? UpdatedDate { get; set; }
         public bool? Active { get; set; }
     }
+
+    public class MaterialTypes
+    {
+        [Key]
+        public Guid? SysKey { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 AutoID { get; set; }
+        public string? Code { get; set; }
+        public string? Description { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public Guid? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public bool? Active { get; set; }
+    }
+
+    public class Materials
+    {
+        [Key]
+        public Guid? SysKey { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 AutoID { get; set; }
+        public string? Code { get; set; }
+        public string? Description { get; set; }
+        public Guid? MaterialGroupSysKey { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public Guid? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public bool? Active { get; set; }
+    }
 }

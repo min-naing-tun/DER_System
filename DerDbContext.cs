@@ -19,6 +19,10 @@ namespace DER_System
 
         public DbSet<Customers> Customers { get; set; }
 
+        public DbSet<MaterialTypes> MaterialTypes { get; set; }
+
+        public DbSet<Materials> Materials { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,10 +30,14 @@ namespace DER_System
             //Table mapping
             modelBuilder.Entity<Users>().ToTable(constants.User);
             modelBuilder.Entity<Customers>().ToTable(constants.Customer);
+            modelBuilder.Entity<MaterialTypes>().ToTable(constants.MaterialType);
+            modelBuilder.Entity<Materials>().ToTable(constants.Material);
 
             //Table exclude on migration
             modelBuilder.Entity<Users>().ToTable(t => t.ExcludeFromMigrations());
             modelBuilder.Entity<Customers>().ToTable(t => t.ExcludeFromMigrations());
+            modelBuilder.Entity<MaterialTypes>().ToTable(t => t.ExcludeFromMigrations());
+            modelBuilder.Entity<Materials>().ToTable(t => t.ExcludeFromMigrations());
         }
     }
 }
