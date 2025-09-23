@@ -2,15 +2,13 @@
 
 namespace DER_System.ViewModels
 {
-    public class CustomerUpdateModel
+    public class CustomerModel
     {
         [Required]
-        public string Code { get; set; } //Unique Id
+        public string? Code { get; set; } //Unique Id
         [Required]
-        public string Name { get; set; }
-        [Required]
-        public string AllocationBlock { get; set; }
-        [Required]
-        public string DeliveryBlock { get; set; }
+        public string? Description { get; set; }
+        public string AllocationBlock { get; set; } = "";
+        public string CentralBlock { get; set; } = "";
     }
 }
