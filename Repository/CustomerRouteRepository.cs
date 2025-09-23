@@ -67,7 +67,7 @@ namespace DER_System.Repository
 
                             // Response
                             response.IsSuccess = true;
-                            response.Message = "Customer Route created successfully!";
+                            response.Message = "Customer route created successfully!";
                         }
                         else
                         {
@@ -302,7 +302,7 @@ namespace DER_System.Repository
 
                             // Response
                             response.IsSuccess = true;
-                            response.Message = "Customer Route created successfully!";
+                            response.Message = "Customer route created successfully!";
                         }
                         else
                         {
