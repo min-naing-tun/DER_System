@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DER_System.Model
 {
+    // < --- IMPORTANT NOTE : These models are related with database table design. If something change in database, then update each table. --- > //
     public class Users
     {
         [Key]
@@ -95,6 +96,21 @@ namespace DER_System.Model
         public Int64 AutoID { get; set; }
         public Guid? CustomerSysKey { get; set; }
         public Guid? RouteSysKey { get; set; }
+        public Guid? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public Guid? UpdatedBy { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public bool? Active { get; set; }
+    }
+
+    public class CustomerMaterialListings
+    {
+        [Key]
+        public Guid? SysKey { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Int64 AutoID { get; set; }
+        public Guid? CustomerSysKey { get; set; }
+        public Guid? MaterialSysKey { get; set; }
         public Guid? CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
         public Guid? UpdatedBy { get; set; }

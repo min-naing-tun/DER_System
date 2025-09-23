@@ -2,11 +2,11 @@
 
 namespace DER_System.ViewModels
 {
-    public class CustomerMaterialListingUpdateModel
+    public class CustomerMaterialListingModel
     {
         [Required]
-        public string CustomerCode { get; set; } //Unique ID
+        public string? CustomerCode { get; set; }
         [Required]
-        public string MaterialCode { get; set; }
+        public string? MaterialCode { get; set; }
     }
 }
