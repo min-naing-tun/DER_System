@@ -39,14 +39,13 @@ namespace DER_System.Repository
             ResponseModel response = new ResponseModel();
             try
             {
-                Customers? maxCheckCustomer = await _context.Customers.FromSqlRaw(@"select top 1 * from " + c.Customer + " order by AutoID desc").SingleOrDefaultAsync();
                 Users? activeCheckUser = await _context.Users.FromSqlRaw(@"select top 1 * from " + c.User + " where Active = 1").SingleOrDefaultAsync();
-                if (maxCheckCustomer != null && activeCheckUser != null)
+                if (activeCheckUser != null)
                 {
                     // Customer
                     Customers customer = new Customers();
                     customer.SysKey = Guid.NewGuid();
-                    // customer.AutoID = Convert.ToInt64(maxCheckCustomer.AutoID) + 1; // no need because it's auto increment column
+                    // customer.AutoID = Convert.ToInt64((await _context.Customers.FromSqlRaw(@"select top 1 * from " + c.Customer + " order by AutoID desc").SingleOrDefaultAsync())!.AutoID) + 1; // no need because it's auto increment column
                     customer.Code = model.Code;
                     customer.Description = model.Description;
                     customer.AlloBlock = (short)(model.AllocationBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
@@ -66,7 +65,7 @@ namespace DER_System.Repository
                 else
                 {
                     response.IsSuccess = false;
-                    response.Message = "Customer not found!";
+                    response.Message = "Active User not found!";
                 }
             }
             catch (Exception e)
@@ -85,25 +84,33 @@ namespace DER_System.Repository
                 Customers? customer = await _context.Customers.FromSqlRaw(@"select * from " + c.Customer + " where SysKey = @key",
                                         new SqlParameter("@key", sysKey)).SingleOrDefaultAsync();
                 Users? activeCheckUser = await _context.Users.FromSqlRaw(@"select top 1 * from " + c.User + " where Active = 1").SingleOrDefaultAsync();
-                if (customer != null && activeCheckUser != null)
+                if (customer != null)
                 {
-                    // Customer
-                    // customer.SysKey = Guid.NewGuid(); // no need for update process
-                    // customer.AutoID = Convert.ToInt64(maxCheckCustomer.AutoID) + 1; // no need because it's auto increment column
-                    customer.Code = model.Code;
-                    customer.Description = model.Description;
-                    customer.AlloBlock = (short)(model.AllocationBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
-                    customer.CentralBlock = (short)(model.CentralBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
-                    customer.UpdatedBy = activeCheckUser.SysKey;
-                    customer.UpdatedDate = DateTime.Now;
-                    // customer.Active = true; // no need for update process
+                    if(activeCheckUser != null)
+                    {
+                        // Customer
+                        // customer.SysKey = Guid.NewGuid(); // no need for update process
+                        // customer.AutoID = Convert.ToInt64(maxCheckCustomer.AutoID) + 1; // no need because it's auto increment column
+                        customer.Code = model.Code;
+                        customer.Description = model.Description;
+                        customer.AlloBlock = (short)(model.AllocationBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
+                        customer.CentralBlock = (short)(model.CentralBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
+                        customer.UpdatedBy = activeCheckUser.SysKey;
+                        customer.UpdatedDate = DateTime.Now;
+                        // customer.Active = true; // no need for update process
 
-                    // Update
-                    await _context.SaveChangesAsync();
+                        // Update
+                        await _context.SaveChangesAsync();
 
-                    // Response
-                    response.IsSuccess = true;
-                    response.Message = "Customer updated successfully!";
+                        // Response
+                        response.IsSuccess = true;
+                        response.Message = "Customer updated successfully!";
+                    }
+                    else
+                    {
+                        response.IsSuccess = false;
+                        response.Message = "Active user not found!";
+                    }
                 }
                 else
                 {
@@ -158,7 +165,6 @@ namespace DER_System.Repository
             try
             {
                 Users? activeCheckUser = await _context.Users.FromSqlRaw(@"select top 1 * from " + c.User + " where Active = 1").SingleOrDefaultAsync();
-                // Check code
                 Customers? customer = await _context.Customers.FromSqlRaw(@"select * from " + c.Customer + " where Code = @code",
                                             new SqlParameter("@code", model.Code)).SingleOrDefaultAsync();
                 if(customer != null)
@@ -198,7 +204,7 @@ namespace DER_System.Repository
                     {
                         //skip update
                         response.IsSuccess = true;
-                        response.Message = $"Record already exist for this code {model.Code}!";
+                        response.Message = $"Existing record is not active for this code {model.Code}!";
                     }
                     #endregion
                 }
@@ -208,7 +214,7 @@ namespace DER_System.Repository
                     // Customer
                     customer = new Customers();
                     customer.SysKey = Guid.NewGuid();
-                    // customer.AutoID = Convert.ToInt64(maxCheckCustomer.AutoID) + 1; // no need because it's auto increment column
+                    //customer.AutoID = Convert.ToInt64((await _context.Customers.FromSqlRaw(@"select top 1 * from " + c.Customer + " order by AutoID desc").SingleOrDefaultAsync())!.AutoID) + 1; // no need because it's auto increment column
                     customer.Code = model.Code;
                     customer.Description = model.Description;
                     customer.AlloBlock = (short)(model.AllocationBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
