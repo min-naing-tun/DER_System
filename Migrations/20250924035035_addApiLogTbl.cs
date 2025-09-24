@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DER_System.Migrations
 {
     /// <inheritdoc />
-    public partial class addTblLogs : Migration
+    public partial class addApiLogTbl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,9 @@ namespace DER_System.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Method_Or_Status_Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Endpoint = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Parameters = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Data = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActionTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
