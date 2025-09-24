@@ -65,7 +65,7 @@ namespace DER_System.Repository
                 else
                 {
                     response.IsSuccess = false;
-                    response.Message = "Active User not found!";
+                    response.Message = "Active user not found!";
                 }
             }
             catch (Exception e)
