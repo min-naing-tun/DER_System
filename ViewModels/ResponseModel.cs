@@ -1,4 +1,4 @@
-﻿namespace DER_System.Helper
+﻿namespace DER_System.ViewModels
 {
     public class ResponseModel
     {

@@ -4,6 +4,7 @@ using DER_System.Utilities;
 using DER_System.ViewModels;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
 
 namespace DER_System.Repository
@@ -237,7 +238,7 @@ namespace DER_System.Repository
                                     customerMaterialListing.MaterialSysKey = material.SysKey;
                                     customerMaterialListing.UpdatedBy = activeCheckUser.SysKey;
                                     customerMaterialListing.UpdatedDate = DateTime.Now;
-                                    //customerMaterialListing.Active = true; //no need for update
+                                    customerMaterialListing.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                                     // Update
                                     await _context.SaveChangesAsync();
@@ -293,7 +294,9 @@ namespace DER_System.Repository
                             customerMaterialListing.MaterialSysKey = material.SysKey;
                             customerMaterialListing.CreatedBy = activeCheckUser!.SysKey;
                             customerMaterialListing.CreatedDate = DateTime.Now;
-                            customerMaterialListing.Active = true;
+                            customerMaterialListing.UpdatedBy = activeCheckUser!.SysKey;
+                            customerMaterialListing.UpdatedDate = DateTime.Now;
+                            customerMaterialListing.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                             // Save
                             await _context.CustomerMaterialListings.AddAsync(customerMaterialListing);

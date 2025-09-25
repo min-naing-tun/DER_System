@@ -8,5 +8,6 @@ namespace DER_System.ViewModels
         public string? CustomerCode { get; set; }
         [Required]
         public string? MaterialCode { get; set; }
+        public string Active { get; set; } = "";
     }
 }

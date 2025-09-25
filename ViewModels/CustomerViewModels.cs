@@ -10,5 +10,6 @@ namespace DER_System.ViewModels
         public string? Description { get; set; }
         public string AllocationBlock { get; set; } = "";
         public string CentralBlock { get; set; } = "";
+        public string Active { get; set; } = "";
     }
 }

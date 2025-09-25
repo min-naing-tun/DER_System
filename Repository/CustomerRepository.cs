@@ -185,7 +185,7 @@ namespace DER_System.Repository
                             customer.CentralBlock = (short)(model.CentralBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
                             customer.UpdatedBy = activeCheckUser.SysKey;
                             customer.UpdatedDate = DateTime.Now;
-                            // customer.Active = true; // no need for update process
+                            customer.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                             // Update
                             await _context.SaveChangesAsync();
@@ -221,7 +221,9 @@ namespace DER_System.Repository
                     customer.CentralBlock = (short)(model.CentralBlock.ToString().Trim().IsNullOrEmpty() ? 0 : 1);
                     customer.CreatedBy = activeCheckUser!.SysKey;
                     customer.CreatedDate = DateTime.Now;
-                    customer.Active = true;
+                    customer.UpdatedBy = activeCheckUser!.SysKey;
+                    customer.UpdatedDate = DateTime.Now;
+                    customer.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                     // Save
                     await _context.Customers.AddAsync(customer);

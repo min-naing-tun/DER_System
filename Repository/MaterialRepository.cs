@@ -208,7 +208,7 @@ namespace DER_System.Repository
                                 material.MaterialGroupSysKey = materialType.SysKey;
                                 material.UpdatedBy = activeCheckUser.SysKey;
                                 material.UpdatedDate = DateTime.Now;
-                                //material.Active = true; // no need for update process
+                                material.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                                 // Update
                                 await _context.SaveChangesAsync();
@@ -256,7 +256,9 @@ namespace DER_System.Repository
                             material.MaterialGroupSysKey = materialType.SysKey;
                             material.CreatedBy = activeCheckUser.SysKey;
                             material.CreatedDate = DateTime.Now;
-                            material.Active = true;
+                            material.UpdatedBy = activeCheckUser!.SysKey;
+                            material.UpdatedDate = DateTime.Now;
+                            material.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                             // Save
                             await _context.Materials.AddAsync(material);

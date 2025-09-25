@@ -238,7 +238,7 @@ namespace DER_System.Repository
                                     customerRouteListing.RouteSysKey = route.SysKey;
                                     customerRouteListing.UpdatedBy = activeCheckUser.SysKey;
                                     customerRouteListing.UpdatedDate = DateTime.Now;
-                                    //customerRouteListing.Active = true; //no need for update
+                                    customerRouteListing.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                                     // Update
                                     await _context.SaveChangesAsync();
@@ -294,7 +294,9 @@ namespace DER_System.Repository
                             customerRouteListing.RouteSysKey = route.SysKey;
                             customerRouteListing.CreatedBy = activeCheckUser!.SysKey;
                             customerRouteListing.CreatedDate = DateTime.Now;
-                            customerRouteListing.Active = true;
+                            customerRouteListing.UpdatedBy = activeCheckUser!.SysKey;
+                            customerRouteListing.UpdatedDate = DateTime.Now;
+                            customerRouteListing.Active = model.Active.ToString().Trim().IsNullOrEmpty() ? false : true;
 
                             // Save
                             await _context.CustomerRouteListings.AddAsync(customerRouteListing);

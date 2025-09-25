@@ -10,5 +10,6 @@ namespace DER_System.ViewModels
         public string? Description { get; set; }
         [Required]
         public string? MaterialType { get; set; }
+        public string Active { get; set; } = "";
     }
 }

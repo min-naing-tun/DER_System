@@ -8,5 +8,6 @@ namespace DER_System.ViewModels
         public string? RouteCode { get; set; }
         [Required]
         public string? CustomerCode { get; set; }
+        public string Active { get; set; } = "";
     }
 }
